@@ -48,7 +48,7 @@ module StripeMock
         assert_existance :customer, $1, customer
         card = get_customer_card(customer, $2)
         assert_existance :card, $2, card
-        card = { id: $2, deleted: true }
+        card = { :id=>$2, :deleted=>true }
         customer[:cards][:data].reject!{|cc| 
           cc[:id] == card[:id]
         }

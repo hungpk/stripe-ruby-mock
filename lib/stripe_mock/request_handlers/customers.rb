@@ -30,11 +30,11 @@ module StripeMock
             raise Stripe::InvalidRequestError.new('You must supply a valid card', nil, 400)
           end
 
-          subscription = Data.mock_subscription({ id: new_id('su') })
+          subscription = Data.mock_subscription({ :id=>new_id('su') })
           subscription.merge!(custom_subscription_params(plan, customers[ params[:id] ], params))
           add_subscription_to_customer(customers[ params[:id] ], subscription)
         elsif params[:trial_end]
-          raise Stripe::InvalidRequestError.new('Received unknown parameter: trial_end', nil, 400)
+          raise Stripe::InvalidRequestError.new('Received unknown :parameter=>trial_end', nil, 400)
         end
 
         customers[ params[:id] ]
@@ -61,8 +61,8 @@ module StripeMock
         assert_existance :customer, $1, customers[$1]
 
         customers[$1] = {
-          id: customers[$1][:id],
-          deleted: true
+          :id=>customers[$1][:id],
+          :deleted=>true
         }
 
         customers[$1]

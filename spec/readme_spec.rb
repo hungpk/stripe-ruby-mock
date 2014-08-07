@@ -8,8 +8,8 @@ describe 'README examples' do
 
     # This doesn't touch stripe's servers nor the internet!
     customer = Stripe::Customer.create({
-      email: 'johnny@appleseed.com',
-      card: 'void_card_token'
+      :email=>'johnny@appleseed.com',
+      :card=>'void_card_token'
     })
     expect(customer.email).to eq('johnny@appleseed.com')
   end
@@ -50,20 +50,19 @@ describe 'README examples' do
 
   it "can override default webhook values" do
     event = StripeMock.mock_webhook_event('customer.created', {
-      :id => 'cus_my_custom_value',
-      :email => 'joe@example.com'
+      :id=>'cus_my_custom_value',
+      :email=>'joe@example.com'
     })
-    # Alternatively:
-    # event.data.object.id = 'cus_my_custom_value'
+    # :Alternatively=>    # event.data.object.id = 'cus_my_custom_value'
     # event.data.object.email = 'joe@example.com'
     expect(event.data.object.id).to eq('cus_my_custom_value')
     expect(event.data.object.email).to eq('joe@example.com')
   end
 
   it "generates a stripe card token" do
-    card_token = StripeMock.generate_card_token(last4: "9191", exp_year: 1984)
+    card_token = StripeMock.generate_card_token(:last4=>"9191", :exp_year=>1984)
 
-    cus = Stripe::Customer.create(card: card_token)
+    cus = Stripe::Customer.create(:card=>card_token)
     card = cus.cards.data.first
     expect(card.last4).to eq("9191")
     expect(card.exp_year).to eq(1984)

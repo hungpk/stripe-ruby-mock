@@ -1,5 +1,5 @@
 require 'ostruct'
-require 'jimson-temp'
+#require 'jimson-temp'
 require 'dante'
 
 require 'stripe'
@@ -16,12 +16,12 @@ require 'stripe_mock/errors/unstarted_state_error'
 require 'stripe_mock/errors/server_timeout_error'
 require 'stripe_mock/errors/closed_client_connection_error'
 
-require 'stripe_mock/client'
-require 'stripe_mock/server'
+#require 'stripe_mock/client'
+#require 'stripe_mock/server'
 
 require 'stripe_mock/api/instance'
-require 'stripe_mock/api/client'
-require 'stripe_mock/api/server'
+#require 'stripe_mock/api/client'
+#require 'stripe_mock/api/server'
 
 require 'stripe_mock/api/bank_tokens'
 require 'stripe_mock/api/card_tokens'

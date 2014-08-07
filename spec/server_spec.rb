@@ -15,15 +15,15 @@ describe 'StripeMock Server' do
     @client = StripeMock.start_client
   end
 
-  after { StripeMock.stop_client(:clear_server_data => true) }
+  after { StripeMock.stop_client(:clear_server_data=>true) }
 
 
   it "uses an RPC client for mock requests" do
     charge = Stripe::Charge.create(
-      amount: 987,
-      currency: 'USD',
-      card: 'card_token_abcde',
-      description: 'card charge'
+      :amount=>987,
+      :currency=>'USD',
+      :card=>'card_token_abcde',
+      :description=>'card charge'
     )
     expect(charge.amount).to eq(987)
     expect(charge.currency).to eq('USD')
@@ -32,7 +32,7 @@ describe 'StripeMock Server' do
 
 
   it "should not clear server data in between client sessions by default" do
-    customer = Stripe::Customer.create(email: 'johnny@appleseed.com')
+    customer = Stripe::Customer.create(:email=>'johnny@appleseed.com')
     expect(customer.email).to eq('johnny@appleseed.com')
 
     server_customer_data = StripeMock.client.get_server_data(:customers)[customer.id]
@@ -49,7 +49,7 @@ describe 'StripeMock Server' do
 
 
   it "returns a response with symbolized hash keys" do
-    Stripe::Plan.create(id: 'x')
+    Stripe::Plan.create(:id=>'x')
     response, api_key = StripeMock.redirect_to_mock_server('get', '/v1/plans/x', 'xxx')
     response.keys.each {|k| expect(k).to be_a(Symbol) }
   end
@@ -118,7 +118,7 @@ describe 'StripeMock Server' do
       StripeMock.start_client(1515)
       # We should never get here
       expect(false).to eq(true)
-    rescue StripeMock::ServerTimeoutError => e
+    rescue StripeMock::ServerTimeoutError=>e
       expect(e.associated_error).to be_a(Errno::ECONNREFUSED)
     end
   end

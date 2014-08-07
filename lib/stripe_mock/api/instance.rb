@@ -18,10 +18,19 @@ module StripeMock
   end
 
   def self.alias_stripe_method(new_name, method_object)
-    Stripe.define_singleton_method(new_name) {|*args| method_object.call(*args) }
+    
+    Stripe.singleton_class.send(:define_method, new_name){ |*args| method_object.call(*args) }
+    
+    #Stripe.define_singleton_method(new_name) {|*args| method_object.call(*args) }
   end
 
   def self.instance; @instance; end
   def self.state; @state; end
+    
+end
 
+module Stripe
+  def singleton_class
+      class << self; self end
+  end
 end

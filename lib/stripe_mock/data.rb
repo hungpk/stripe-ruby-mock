@@ -5,92 +5,92 @@ module StripeMock
       cus_id = params[:id] || "test_cus_default"
       cards.each {|card| card[:customer] = cus_id}
       {
-        email: 'stripe_mock@example.com',
-        description: 'an auto-generated stripe customer data mock',
-        object: "customer",
-        created: 1372126710,
-        id: cus_id,
-        livemode: false,
-        delinquent: false,
-        discount: nil,
-        account_balance: 0,
-        cards: {
-          object: "list",
-          count: cards.count,
-          url: "/v1/customers/#{cus_id}/cards",
-          data: cards
+        :email=>'stripe_mock@example.com',
+        :description=>'an auto-generated stripe customer data mock',
+        :object=>"customer",
+        :created=>1372126710,
+        :id=>cus_id,
+        :livemode=>false,
+        :delinquent=>false,
+        :discount=>nil,
+        :account_balance=>0,
+        :cards=>{
+          :object=>"list",
+          :count=>cards.count,
+          :url=>"/v1/customers/#{cus_id}/cards",
+          :data=>cards
         },
-        subscriptions: {
-          object: "list",
-          count: 0,
-          url: "/v1/customers/#{cus_id}/subscriptions",
-          data: []
+        :subscriptions=>{
+          :object=>"list",
+          :count=>0,
+          :url=>"/v1/customers/#{cus_id}/subscriptions",
+          :data=>[]
         },
-        default_card: nil
+        :default_card=>nil
       }.merge(params)
     end
 
     def self.mock_charge(params={})
       {
-        id: "ch_1fD6uiR9FAA2zc",
-        object: "charge",
-        created: 1366194027,
-        livemode: false,
-        paid: true,
-        amount: 0,
-        currency: "usd",
-        refunded: false,
-        fee: 0,
-        fee_details: [
+        :id=>"ch_1fD6uiR9FAA2zc",
+        :object=>"charge",
+        :created=>1366194027,
+        :livemode=>false,
+        :paid=>true,
+        :amount=>0,
+        :currency=>"usd",
+        :refunded=>false,
+        :fee=>0,
+        :fee_details=>[
         ],
-        card: {
-          object: "card",
-          last4: "4242",
-          type: "Visa",
-          exp_month: 12,
-          exp_year: 2013,
-          fingerprint: "3TQGpK9JoY1GgXPw",
-          country: "US",
-          name: "name",
-          address_line1: nil,
-          address_line2: nil,
-          address_city: nil,
-          address_state: nil,
-          address_zip: nil,
-          address_country: nil,
-          cvc_check: nil,
-          address_line1_check: nil,
-          address_zip_check: nil
+        :card=>{
+          :object=>"card",
+          :last4=>"4242",
+          :type=>"Visa",
+          :exp_month=>12,
+          :exp_year=>2013,
+          :fingerprint=>"3TQGpK9JoY1GgXPw",
+          :country=>"US",
+          :name=>"name",
+          :address_line1=>nil,
+          :address_line2=>nil,
+          :address_city=>nil,
+          :address_state=>nil,
+          :address_zip=>nil,
+          :address_country=>nil,
+          :cvc_check=>nil,
+          :address_line1_check=>nil,
+          :address_zip_check=>nil
         },
-        captured: params.has_key?(:capture) ? params.delete(:capture) : true,
-        refunds: [
+        :captured=>params.has_key?(:capture) ? params.delete(:capture) : true,
+        :refunds=>[
         ],
-        balance_transaction: "txn_2dyYXXP90MN26R",
-        failure_message: nil,
-        failure_code: nil,
-        amount_refunded: 0,
-        customer: nil,
-        invoice: nil,
-        description: nil,
-        dispute: nil,
-        metadata: {
+        :balance_transaction=>"txn_2dyYXXP90MN26R",
+        :failure_message=>nil,
+        :failure_code=>nil,
+        :amount_refunded=>0,
+        :customer=>nil,
+        :invoice=>nil,
+        :description=>nil,
+        :dispute=>nil,
+        :metadata=>{
         }
       }.merge(params)
     end
 
     def self.mock_refund(params={})
       mock_charge(params[:charge]).merge({
-        refunded: true,
-        refunds: [
+        :refunded=>true,
+        :refunds=>[
           {
-            amount: params[:refund][:amount],
-            currency: "usd",
-            created: 1380208998,
-            object: "refund",
-            balance_transaction: params[:refund][:balance_transaction]
+            :amount=>params[:refund][:amount],
+            :currency=>"usd",
+            :created=>1380208998,
+            :object=>"refund",
+            :balance_transaction=>params[:refund][:balance_transaction]
           }
         ],
-        amount_refunded: params[:refund][:amount]
+        :amount_refunded=>params[:refund][:amount]
       })
     end
 
@@ -104,37 +104,37 @@ module StripeMock
 
     def self.mock_card(params={})
       {
-        id: "test_cc_default",
-        object: "card",
-        last4: "4242",
-        type: "Visa",
-        exp_month: 4,
-        exp_year: 2016,
-        fingerprint: "wXWJT135mEK107G8",
-        customer: "test_cus_default",
-        country: "US",
-        name: "Johnny App",
-        address_line1: nil,
-        address_line2: nil,
-        address_city: nil,
-        address_state: nil,
-        address_zip: nil,
-        address_country: nil,
-        cvc_check: nil,
-        address_line1_check: nil,
-        address_zip_check: nil
+        :id=>"test_cc_default",
+        :object=>"card",
+        :last4=>"4242",
+        :type=>"Visa",
+        :exp_month=>4,
+        :exp_year=>2016,
+        :fingerprint=>"wXWJT135mEK107G8",
+        :customer=>"test_cus_default",
+        :country=>"US",
+        :name=>"Johnny App",
+        :address_line1=>nil,
+        :address_line2=>nil,
+        :address_city=>nil,
+        :address_state=>nil,
+        :address_zip=>nil,
+        :address_country=>nil,
+        :cvc_check=>nil,
+        :address_line1_check=>nil,
+        :address_zip_check=>nil
       }.merge(params)
     end
 
     def self.mock_bank_account(params={})
       {
-        object: "bank_account",
-        bank_name: "STRIPEMOCK TEST BANK",
-        last4: "6789",
-        country: "US",
-        currency: "usd",
-        validated: false,
-        fingerprint: "aBcFinGerPrINt123"
+        :object=>"bank_account",
+        :bank_name=>"STRIPEMOCK TEST BANK",
+        :last4=>"6789",
+        :country=>"US",
+        :currency=>"usd",
+        :validated=>false,
+        :fingerprint=>"aBcFinGerPrINt123"
       }.merge(params)
     end
 
@@ -184,70 +184,70 @@ module StripeMock
       in_id = params[:id] || "test_in_default"
       lines << Data.mock_line_item() if lines.empty?
       {
-        id: 'in_test_invoice',
-        date: 1349738950,
-        period_end: 1349738950,
-        period_start: 1349738950,
-        lines: {
-          object: "list",
-          count: lines.count,
-          url: "/v1/invoices/#{in_id}/lines",
-          data: lines
+        :id=>'in_test_invoice',
+        :date=>1349738950,
+        :period_end=>1349738950,
+        :period_start=>1349738950,
+        :lines=>{
+          :object=>"list",
+          :count=>lines.count,
+          :url=>"/v1/invoices/#{in_id}/lines",
+          :data=>lines
         },
-        subtotal: lines.map {|line| line[:amount]}.reduce(0, :+),
-        total: lines.map {|line| line[:amount]}.reduce(0, :+),
-        customer: "test_customer",
-        object: 'invoice',
-        attempted: false,
-        closed: false,
-        paid: false,
-        livemode: false,
-        attempt_count: 0,
-        amount_due: lines.map {|line| line[:amount]}.reduce(0, :+),
-        currency: 'usd',
-        starting_balance: 0,
-        ending_balance: nil,
-        next_payment_attempt: 1349825350,
-        charge: nil,
-        discount: nil,
-        subscription: nil
+        :subtotal=>lines.map {|line| line[:amount]}.reduce(0, :+),
+        :total=>lines.map {|line| line[:amount]}.reduce(0, :+),
+        :customer=>"test_customer",
+        :object=>'invoice',
+        :attempted=>false,
+        :closed=>false,
+        :paid=>false,
+        :livemode=>false,
+        :attempt_count=>0,
+        :amount_due=>lines.map {|line| line[:amount]}.reduce(0, :+),
+        :currency=>'usd',
+        :starting_balance=>0,
+        :ending_balance=>nil,
+        :next_payment_attempt=>1349825350,
+        :charge=>nil,
+        :discount=>nil,
+        :subscription=>nil
       }.merge(params)
     end
 
     def self.mock_line_item(params = {})
       {
-        id: "ii_test",
-        object: "line_item",
-        type: "invoiceitem",
-        livemode: false,
-        amount: 1000,
-        currency: "usd",
-        proration: false,
-        period: {
-          start: 1349738920,
-          end: 1349738920
+        :id=>"ii_test",
+        :object=>"line_item",
+        :type=>"invoiceitem",
+        :livemode=>false,
+        :amount=>1000,
+        :currency=>"usd",
+        :proration=>false,
+        :period=>{
+          :start=>1349738920,
+          :end=>1349738920
         },
-        quantity: nil,
-        plan: nil,
-        description: "Test invoice item",
-        metadata: {}
+        :quantity=>nil,
+        :plan=>nil,
+        :description=>"Test invoice item",
+        :metadata=>{}
       }.merge(params)
     end
 
     def self.mock_invoice_item(params = {})
       {
-        id: "ii_test",
-        object: "invoiceitem",
-        date: 1349738920,
-        amount: 1099,
-        livemode: false,
-        proration: false,
-        currency: "usd",
-        customer: "cus_test",
-        description: "invoice item desc",
-        metadata: {},
-        invoice: nil,
-        subscription: nil
+        :id=>"ii_test",
+        :object=>"invoiceitem",
+        :date=>1349738920,
+        :amount=>1099,
+        :livemode=>false,
+        :proration=>false,
+        :currency=>"usd",
+        :customer=>"cus_test",
+        :description=>"invoice item desc",
+        :metadata=>{},
+        :invoice=>nil,
+        :subscription=>nil
       }.merge(params)
     end
 
@@ -273,15 +273,15 @@ module StripeMock
 
     def self.mock_plan(params={})
       {
-        interval: "month",
-        name: "The Basic Plan",
-        amount: 2300,
-        currency: "usd",
-        id: "2",
-        object: "plan",
-        livemode: false,
-        interval_count: 1,
-        trial_period_days: nil
+        :interval=>"month",
+        :name=>"The Basic Plan",
+        :amount=>2300,
+        :currency=>"usd",
+        :id=>"2",
+        :object=>"plan",
+        :livemode=>false,
+        :interval_count=>1,
+        :trial_period_days=>nil
       }.merge(params)
     end
 
@@ -372,7 +372,7 @@ module StripeMock
       {
         "error" => {
           "type" => "invalid_request_error",
-          "message" => "Invalid API Key provided: invalid"
+          "message" => "Invalid API Key :provided=>invalid"
         }
       }
     end
@@ -400,7 +400,7 @@ module StripeMock
 
     def self.mock_delete_subscription(params={})
       {
-        deleted: true
+        :deleted=>true
       }.merge(params)
     end
 

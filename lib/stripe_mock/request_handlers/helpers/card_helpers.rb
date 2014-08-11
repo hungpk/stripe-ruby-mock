@@ -8,15 +8,16 @@ module StripeMock
 
       def add_card_to_customer(card, cus)
         card[:customer] = cus[:id]
-
-        if cus[:cards][:count] == 0
-          cus[:cards][:count] += 1
-        else
-          cus[:cards][:data].delete_if {|card| card[:id] == cus[:default_card]}
-        end
-
+       
+        #if cus[:cards][:count] == 0
+        #  
+        #else
+        #  cus[:cards][:data].reject!{|c| c[:id] == cus[:default_card]}
+        #end
+        cus[:cards][:count] += 1
+        
         cus[:cards][:data] << card
-
+        
         card
       end
 

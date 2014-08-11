@@ -17,7 +17,10 @@ module StripeMock
         assert_existance :customer, $1, customer
 
         card = card_from_params(params[:card])
-        add_card_to_customer(card, customer)
+        
+        card = add_card_to_customer(card, customer)
+        
+        card
       end
 
       def retrieve_cards(route, method_url, params, headers)

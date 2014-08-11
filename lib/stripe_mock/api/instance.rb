@@ -30,7 +30,7 @@ module StripeMock
 end
 
 module Stripe
-  def singleton_class
+  def self.singleton_class
       class << self; self end
   end
 end

@@ -19,9 +19,17 @@ module StripeMock
         else
           customer = customers[params[:customer]]
           assert_existance :customer, params[:customer], customer
+          
           customer_card = get_customer_card(customer, customer[:default_card])
+          customer_card ||= customer[:cards][:data].last
         end
-
+        
+        p "==========#{params[:customer]}============"
+        p "Customer: ", customer
+        p "Default card: ", customer[:default_card]
+        p "customer card: ", customer_card
+        p "========================"
+        
         token_id = generate_card_token(customer_card)
         card = @card_tokens[token_id]
 

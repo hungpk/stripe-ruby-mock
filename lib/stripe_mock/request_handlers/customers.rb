@@ -4,7 +4,7 @@ module StripeMock
 
       def Customers.included(klass)
         klass.add_handler 'post /v1/customers',                     :new_customer
-        klass.add_handler 'post /v1/customers/(.*)',                :update_customer
+        klass.add_handler 'post /v1/customers/([a-z0-9_]+)',                :update_customer
         klass.add_handler 'get /v1/customers/(.*)',                 :get_customer
         klass.add_handler 'delete /v1/customers/(.*)',              :delete_customer
         klass.add_handler 'get /v1/customers',                      :list_customers

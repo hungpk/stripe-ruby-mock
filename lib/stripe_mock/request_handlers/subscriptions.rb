@@ -29,9 +29,10 @@ module StripeMock
         verify_card_present(customer, plan)
 
         subscription = Data.mock_subscription({ :id=>(params[:id] || new_id('su')) })
+        
         subscription.merge!(custom_subscription_params(plan, customer, params))
         add_subscription_to_customer(customer, subscription)
-
+        
         # oddly, subscription returned from 'create_subscription' does not expand plan
         subscription.merge(:plan=>params[:plan])
       end
@@ -61,7 +62,9 @@ module StripeMock
 
         customer = customers[$1]
         assert_existance :customer, $1, customer
+        
         subscription = get_customer_subscription(customer, $2)
+      
         assert_existance :subscription, $2, subscription
 
         if params[:card]
